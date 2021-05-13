@@ -1,11 +1,9 @@
 import './App.css';
+import React from 'react';
+import { Directory } from './Pages/Directory/Directory';
 
-function App() {
+export function App() {
   return (
-    <div className="App">
-      <h1>Hello, World</h1>
-    </div>
+    <Directory />
   );
 }
-
-export default App;
