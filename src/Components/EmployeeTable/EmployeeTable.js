@@ -2,14 +2,14 @@ import React from 'react';
 import './styles.css'
 
 export function EmployeeTable(props) {
-    return(
+    return (
         <div className="employeeTableContainer">
             <table className="table">
                 <tr>
+                    <th>Photo</th>
                     <th>Name</th>
-                    <th>Position</th>
-                    <th>Department</th>
-                    <th>Phone Number</th>
+                    <th>Email</th>
+                    <th>DOB</th>
                 </tr>
                 <tr>
                     <td>Michael</td>
