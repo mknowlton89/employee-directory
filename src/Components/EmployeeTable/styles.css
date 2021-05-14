@@ -12,6 +12,7 @@
     font-size: 14px;
 }
 
-.table-loading {
-    
+.sortBtn {
+    border: none;
+    background-color: transparent;
 }
