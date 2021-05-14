@@ -7,34 +7,28 @@ import './styles.css';
 export function Directory() {
     const [employeeList, setEmployeeList] = useState([])
 
+    const [originalEmployeeList, setOriginalEmployeeList] = useState([])
+
     useEffect(() => {
         API.getEmployees()
             .then((res) => {
                 setEmployeeList(res.data.results);
+                setOriginalEmployeeList(res.data.results);
             })
-            // .then(console.log(employeeList))
             .catch(err => console.log(err))
     }, []);
 
     const handleListSort = (event) => {
-        // console.log(event.target.value);
-        // console.log(employeeList);
-        let originalList = employeeList;
-        console.log(event.target.value);
-
-        if (event.target.value === "") {
-            setEmployeeList(originalList);
-            return;
+        if (!event.target.value) {
+            setEmployeeList(originalEmployeeList);
+        } else {
+            let sortedList = employeeList.filter(employee => {
+                if (employee.name.first.includes(event.target.value) || employee.name.last.includes(event.target.value) || employee.phone.includes(event.target.value)) {
+                    return true;
+                }
+            });
+            setEmployeeList(sortedList);
         }
-
-        let sortedList = employeeList.filter(employee => {
-            if (employee.name.first.includes(event.target.value) || employee.name.last.includes(event.target.value)) {
-                return true;
-            }
-        });
-
-        setEmployeeList(sortedList);
-        // console.log(sortedList);
     };
 
 
@@ -52,7 +46,9 @@ export function Directory() {
                 />
             </div>
             <EmployeeTable employees={employeeList}
-                setEmployeeList={setEmployeeList} />
+                setEmployeeList={setEmployeeList}
+                originalEmployeeList={originalEmployeeList}
+            />
         </div>
     )
 };
