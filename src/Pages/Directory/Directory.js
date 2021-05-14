@@ -12,9 +12,31 @@ export function Directory() {
             .then((res) => {
                 setEmployeeList(res.data.results);
             })
-            .then(console.log(employeeList))
+            // .then(console.log(employeeList))
             .catch(err => console.log(err))
     }, []);
+
+    const handleListSort = (event) => {
+        // console.log(event.target.value);
+        // console.log(employeeList);
+        let originalList = employeeList;
+        console.log(event.target.value);
+
+        if (event.target.value === "") {
+            setEmployeeList(originalList);
+            return;
+        }
+
+        let sortedList = employeeList.filter(employee => {
+            if (employee.name.first.includes(event.target.value) || employee.name.last.includes(event.target.value)) {
+                return true;
+            }
+        });
+
+        setEmployeeList(sortedList);
+        // console.log(sortedList);
+    };
+
 
     return (
         <div>
@@ -26,9 +48,11 @@ export function Directory() {
                     type="text"
                     name="search"
                     placeholder="Enter an employee's name"
+                    onChange={handleListSort}
                 />
             </div>
-            <EmployeeTable employees={employeeList} />
+            <EmployeeTable employees={employeeList}
+                setEmployeeList={setEmployeeList} />
         </div>
     )
 };
