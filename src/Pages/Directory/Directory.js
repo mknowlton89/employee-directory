@@ -5,13 +5,14 @@ import { EmployeeTable } from '../../Components/EmployeeTable/EmployeeTable';
 import './styles.css';
 
 export function Directory() {
-    const [userList, setUserList] = useState({})
+    const [employeeList, setEmployeeList] = useState([])
 
     useEffect(() => {
         API.getEmployees()
             .then((res) => {
-                console.log(res.data.results);
+                setEmployeeList(res.data.results);
             })
+            .then(console.log(employeeList))
             .catch(err => console.log(err))
     }, []);
 
@@ -27,7 +28,7 @@ export function Directory() {
                     placeholder="Enter an employee's name"
                 />
             </div>
-            <EmployeeTable />
+            <EmployeeTable employees={employeeList} />
         </div>
     )
 };

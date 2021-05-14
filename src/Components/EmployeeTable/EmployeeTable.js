@@ -2,6 +2,9 @@ import React from 'react';
 import './styles.css'
 
 export function EmployeeTable(props) {
+
+    console.log(props);
+
     return (
         <div className="employeeTableContainer">
             <table className="table">
@@ -11,24 +14,14 @@ export function EmployeeTable(props) {
                     <th>Email</th>
                     <th>DOB</th>
                 </tr>
-                <tr>
-                    <td>Michael</td>
-                    <td>Jr Software Engineer</td>
-                    <td>Engineering</td>
-                    <td>770-843-4662</td>
-                </tr>
-                <tr>
-                    <td>Heather</td>
-                    <td>Sr Software Engineer</td>
-                    <td>Special Projects</td>
-                    <td>770-843-4663</td>
-                </tr>
-                <tr>
-                    <td>Cameron</td>
-                    <td>BehBeh</td>
-                    <td>N/A</td>
-                    <td>770-843-4664</td>
-                </tr>
+                {props.employees.length > 0 ? props.employees.map((employeeData, index) => (
+                    <tr key={index}>
+                        <td><img src={employeeData.picture.thumbnail}/></td>
+                        <td>{employeeData.name.first} {employeeData.name.last}</td>
+                        <td>{employeeData.email}</td>
+                        <td>{employeeData.phone}</td>
+                    </tr>
+                )) : <div>No Employees Found</div>}
             </table>
         </div>
     )
